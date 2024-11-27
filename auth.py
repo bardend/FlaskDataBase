@@ -8,6 +8,8 @@ from sqlalchemy.orm import Session
 from user import *
 from security import *
 from database import *
+#from flask_jwt_extended import current_user
+
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -47,7 +49,33 @@ def login():
 
 @auth_bp.route('/refresh-token', methods=['POST'])
 @jwt_required(refresh=True)
+#Rol -- logg
 def refresh_token():
     current_user = get_jwt_identity()
     new_access_token = create_access_token(identity=current_user)
     return jsonify(accessToken=new_access_token), 200
+
+
+'''
+@auth_bp.route("/who_am_i", methods=["GET"])
+@jwt_required()
+def protected():
+    # We can now access our sqlalchemy User object via `current_user`.
+    return jsonify(
+        id=current_user.id,
+        username=current_user.username,
+        password_hash=current_user.password_hash,
+    )
+
+'''
+
+'''
+# Protect a route with jwt_required, which will kick out requests
+# without a valid JWT present.
+@app.route("/protected", methods=["GET"])
+@jwt_required()
+def protected():
+    # Access the identity of the current user with get_jwt_identity
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
+''' 

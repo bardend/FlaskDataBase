@@ -73,13 +73,34 @@ class AuthClient:
             "Content-Type": "application/json"
         }
 
+    def my_info(self):
+        
+        url = f"{self.base_url}/auth/who_am_i"
+        headers = {
+            "Authorization": f"Bearer {self.access_token}"
+        }
+        
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            data = response.json()
+            print(data)
+            #self.access_token = data.get('accessToken')
+        
+        '''
+        return {
+            "status_code": response.status_code,
+            "response": response.json()
+        }
+        '''
+
+
 if __name__ == "__main__":
     # Crear instancia del cliente
     client = AuthClient()
     
     # Definir datos de prueba
-    test_username = "usuario12345"
-    test_password = "12345"
+    test_username = "usuario321:"
+    test_password = "1234413"
     
     # 1. Crear cuenta
     print("\n1. Creando cuenta...")
@@ -95,8 +116,13 @@ if __name__ == "__main__":
     print("\n3. Refrescando token...")
     refresh_result = client.refresh_access_token()  # Usamos el nuevo nombre del método
     print(json.dumps(refresh_result, indent=2))
-    
+
+    print("Vamos a ver mi info")
+    client.my_info()
+
+    '''
     # Ejemplo de manejo de errores
     print("\n4. Probando crear cuenta duplicada...")
     duplicate_result = client.create_account(test_username, test_password)
     print(json.dumps(duplicate_result, indent=2))
+    '''
