@@ -76,22 +76,31 @@ class AuthClient:
     def my_info(self):
         
         url = f"{self.base_url}/auth/who_am_i"
+
         headers = {
             "Authorization": f"Bearer {self.access_token}"
         }
         
         response = requests.get(url, headers=headers)
-        if response.status_code == 200:
-            data = response.json()
-            print(data)
-            #self.access_token = data.get('accessToken')
-        
-        '''
+
         return {
             "status_code": response.status_code,
             "response": response.json()
         }
-        '''
+
+    def prube(self):
+        url = f"{self.base_url}/auth/who_am_i2"
+
+        headers = {
+            "Authorization": f"Bearer {self.access_token}"
+        }
+       
+        response = requests.get(url, headers=headers)
+
+        return {
+            "status_code": response.status_code,
+            "response": response.json()
+        }
 
 
 if __name__ == "__main__":
@@ -99,8 +108,8 @@ if __name__ == "__main__":
     client = AuthClient()
     
     # Definir datos de prueba
-    test_username = "usuario321:"
-    test_password = "1234413"
+    test_username = "u1123::"
+    test_password = "14231"
     
     # 1. Crear cuenta
     print("\n1. Creando cuenta...")
@@ -118,11 +127,8 @@ if __name__ == "__main__":
     print(json.dumps(refresh_result, indent=2))
 
     print("Vamos a ver mi info")
-    client.my_info()
+    inf = client.my_info()
+    print(json.dumps(inf, indent=2))
 
-    '''
-    # Ejemplo de manejo de errores
-    print("\n4. Probando crear cuenta duplicada...")
-    duplicate_result = client.create_account(test_username, test_password)
-    print(json.dumps(duplicate_result, indent=2))
-    '''
+    xd = client.prube()
+    print(json.dumps(xd, indent=2))
