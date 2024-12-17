@@ -30,5 +30,6 @@ def user_lookup_callback(_jwt_header, jwt_data):
     return db.query(User).filter(User.username == identity).first()
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0")
+    #app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, host='0.0.0.0', port=5000)
 

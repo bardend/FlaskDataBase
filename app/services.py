@@ -1,7 +1,6 @@
 import jwt
 from sqlalchemy.orm import Session
 from user import *
-from security import *
 from database import *
 
 def register_user(data):
@@ -16,12 +15,11 @@ def register_user(data):
     if db.query(User).filter(User.username == username).first() :
         return {'message': 'User already exists', 'status': 400}
     
-    new_user = User(username=username, password_hash=password_hash, rol = 'guest')
+    new_user = User(username=username, password_hash=password_hash, rol = 'guest', online=False)
     db.add(new_user)
     db.commit()
 
     return {'message': 'User registered successfully', 'status': 201}
-
 
 def login_user(data):
     username = data.get('username')
@@ -29,9 +27,14 @@ def login_user(data):
     
     db = next(get_db())
     user = db.query(User).filter(User.username == username).first()
+
+
     if not user or user.password_hash != password_hash:
         return {'message': 'Invalid login', 'status':400}
+    if user.online:
+        return {'message': 'User is online now', 'status':400}
+
+    user.online = True
 
     return {'username': username, 'status': 200}
-
 

@@ -1,0 +1,24 @@
+# Excluir archivos innecesarios
+logs/
+README.md
+cliente.py
+cliente2.py
+
+# Archivos de configuración local
+.env
+
+# Archivos generados por Git
+.git
+.gitignore
+
+# Caché de Python
+__pycache__/
+
+# Archivos de dependencias locales
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.sqlite3
+
+

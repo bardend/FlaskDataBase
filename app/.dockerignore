@@ -1,4 +1,3 @@
-__pycache__/
 # Archivos y directorios de desarrollo
 __pycache__
 *.pyc
@@ -34,3 +33,6 @@ README.md
 *.bak
 *.swp
 
+
+#carpeta test
+test/

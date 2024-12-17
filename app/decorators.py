@@ -19,7 +19,6 @@ def role_required(required_role):
             if not auth_header:
                 return jsonify({"error": "Missing token in headers."}), 400
 
-            print(auth_header)
             try:
                 token = auth_header.split(" ")[1]
                 # Decodificar el token y extraer la identidad del usuario
@@ -50,8 +49,7 @@ def audit_log(action) :
             # En este caso yo quiero imprimir el nombre del usuario
 
             token = request.headers.get('Authorization')
-            user_name = request.headers.get('username')
-            user = None
+            user_name = request.json.get('username', None)
 
             if token:
                 token = auth_header.split(" ")[1]
@@ -63,6 +61,8 @@ def audit_log(action) :
                 return jsonify({"error": "Missing user information."}), 400
 
             retval =  func(*args, **kwargs)
+
+
             if retval:
 
                 if retval[1] == 200 or retval[1] == 201:

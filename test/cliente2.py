@@ -108,8 +108,8 @@ if __name__ == "__main__":
     client = AuthClient()
     
     # Definir datos de prueba
-    test_username = "u1123::"
-    test_password = "14231"
+    test_username = "u112::"
+    test_password = "1421"
     
     # 1. Crear cuenta
     print("\n1. Creando cuenta...")
