@@ -1,12 +1,12 @@
-#database.py
 # database.py
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker
-from user import Base
+from sqlalchemy.ext.declarative import declarative_base
 from dotenv import load_dotenv
 import os
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+
 
 def create_database():
     # Conexión al servidor PostgreSQL por defecto
@@ -29,6 +29,9 @@ def create_database():
     finally:
         cursor.close()
         conn.close()
+
+Base = declarative_base()
+metadata = MetaData()
 
 # URL de conexión
 DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://postgres:123@localhost:5432/relation')

@@ -126,6 +126,7 @@ if __name__ == "__main__":
     refresh_result = client.refresh_access_token()  # Usamos el nuevo nombre del método
     print(json.dumps(refresh_result, indent=2))
 
+    # 4. Ver la info del cliente
     print("Vamos a ver mi info")
     inf = client.my_info()
     print(json.dumps(inf, indent=2))
